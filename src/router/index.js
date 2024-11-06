@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
+import DefectDensity from '../views/DefectDensity.vue'
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -12,6 +13,11 @@ const router = createRouter({
 		{
 			path: '/dashboard',
 			component: Dashboard
+		},
+		{
+			path: '/defect-density',
+			component: DefectDensity
+			// component: Dashboard
 		},
 	],
 })
