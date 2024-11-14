@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
 import DefectDensity from "../views/DefectDensity.vue";
 import CodeInsight from "../views/CodeInsight.vue";
+import AIMInsights from "../views/AIMInsights.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,6 +23,10 @@ const router = createRouter({
     {
       path: "/code-insight",
       component: CodeInsight,
+    },
+    {
+      path: "/aeim-insight",
+      component: AIMInsights,
     },
   ],
 });
