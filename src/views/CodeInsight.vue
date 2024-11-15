@@ -65,19 +65,18 @@
       <!-- Code Quality Content Goes Here -->
       <h2></h2>
       <CodeQuality />
-      <!-- Add charts, cards, or other components relevant to Code Quality here -->
     </div>
 
     <div v-if="activeTab === 'Repository Activities'">
       <!-- Repository Activities Content Goes Here -->
       <h2>Repository Activities Content</h2>
-      <!-- Add charts, cards, or other components relevant to Repository Activities here -->
+      <RepositoryActivities />
     </div>
 
     <div v-if="activeTab === 'Developer Metrics'">
       <!-- Developer Metrics Content Goes Here -->
       <h2>Developer Metrics Content</h2>
-      <!-- Add charts, cards, or other components relevant to Developer Metrics here -->
+      <DeveloperMetrics />
     </div>
   </div>
 </template>
@@ -88,6 +87,9 @@ import BuildTrendChart from "../charts/BuildTrendChart.vue";
 import InsightCard from "../charts/InsightCard.vue";
 import TeamTable from "../tables/TeamTable.vue";
 import CodeQuality from "./CodeQuality.vue";
+import DeveloperMetrics from "./DeveloperMetrics.vue";
+import RepositoryActivities from "./RepositoryActivities.vue";
+
 export default {
   name: "CodeInsight",
   components: {
@@ -96,6 +98,8 @@ export default {
     InsightCard,
     TeamTable,
     CodeQuality,
+    DeveloperMetrics,
+    RepositoryActivities,
   },
   data() {
     return {
