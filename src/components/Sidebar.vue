@@ -60,7 +60,6 @@ const ToggleMenu = () => {
   localStorage.setItem("is_expanded", is_expanded.value);
 };
 
-// Access current route
 const route = useRoute();
 
 // Computed property to check if the current URL contains "home"
