@@ -1,5 +1,5 @@
 <template>
-  <aside :class="`${is_expanded ? 'is-expanded' : ''}`">
+  <aside v-if="!isHomePage" :class="`${is_expanded ? 'is-expanded' : ''}`">
     <div class="logo">
       <h2>AeIM</h2>
       <img :src="logoURL" alt="Vue" />
@@ -33,14 +33,6 @@
         <span class="material-icons">insights</span>
         <span class="text">AeIM Insights</span>
       </router-link>
-      <!-- <router-link to="/team" class="button">
-				<span class="material-icons">group</span>
-				<span class="text">Team</span>
-			</router-link>
-			<router-link to="/contact" class="button">
-				<span class="material-icons">email</span>
-				<span class="text">Contact</span>
-			</router-link> -->
     </div>
 
     <div class="flex"></div>
@@ -55,15 +47,24 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 import logoURL from "../assets/LogoPru.png";
 
+// State for expanded menu
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true");
 
+// Function to toggle menu expansion
 const ToggleMenu = () => {
   is_expanded.value = !is_expanded.value;
   localStorage.setItem("is_expanded", is_expanded.value);
 };
+
+// Access current route
+const route = useRoute();
+
+// Computed property to check if the current URL contains "home"
+const isHomePage = computed(() => route.fullPath.includes("home"));
 </script>
 
 <style lang="scss" scoped>
