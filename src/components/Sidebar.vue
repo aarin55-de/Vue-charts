@@ -1,24 +1,27 @@
 <template>
   <aside :class="`${is_expanded ? 'is-expanded' : ''}`">
-    <div class="logo">
-      <h2>AeIM</h2>
-      <img :src="logoURL" alt="Vue" />
-    </div>
-
+    <!-- Menu Toggle -->
     <div class="menu-toggle-wrap">
       <button class="menu-toggle" @click="ToggleMenu">
-        <span class="material-icons">keyboard_double_arrow_right</span>
+        <span class="material-icons">
+          {{
+            is_expanded
+              ? "keyboard_double_arrow_left"
+              : "keyboard_double_arrow_right"
+          }}
+        </span>
       </button>
     </div>
 
-    <h3>Insights</h3>
+    <!-- Menu Items -->
     <div class="menu">
+      <h3>Insights</h3>
       <router-link to="/dashboard" class="button">
         <span class="material-icons">dashboard</span>
         <span class="text">Overview</span>
       </router-link>
       <router-link to="/stories" class="button">
-        <span class="material-icons">dashboard</span>
+        <span class="material-icons">article</span>
         <span class="text">Stories</span>
       </router-link>
       <router-link to="/code-insight" class="button">
@@ -33,18 +36,9 @@
         <span class="material-icons">insights</span>
         <span class="text">AeIM Insights</span>
       </router-link>
-      <!-- <router-link to="/team" class="button">
-				<span class="material-icons">group</span>
-				<span class="text">Team</span>
-			</router-link>
-			<router-link to="/contact" class="button">
-				<span class="material-icons">email</span>
-				<span class="text">Contact</span>
-			</router-link> -->
     </div>
 
-    <div class="flex"></div>
-
+    <!-- Footer Menu -->
     <div class="menu">
       <router-link to="/settings" class="button">
         <span class="material-icons">settings</span>
@@ -70,59 +64,61 @@ const ToggleMenu = () => {
 aside {
   display: flex;
   flex-direction: column;
-
   background-color: var(--dark);
   color: var(--light);
-
+  height: calc(100vh - 110px); /* Adjust height to fit under navbar */
   width: calc(2rem + 32px);
+  position: fixed;
+  top: 110px; /* Push down below the navbar */
+  left: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  min-height: 100vh;
   padding: 1rem;
-
-  transition: 0.2s ease-in-out;
-
-  .flex {
-    flex: 1 1 0%;
-  }
+  transition: width 0.3s ease-in-out;
 
   .logo {
+    display: flex;
+    align-items: center;
     margin-bottom: 1rem;
 
     img {
-      width: 50%;
+      width: 30px;
+      height: 30px;
+    }
+
+    .logo-text {
+      margin-left: 10px;
+      font-size: 1.25rem;
+      color: var(--light);
+      transition: opacity 0.3s ease-in-out;
     }
   }
 
   .menu-toggle-wrap {
+    margin-top: 1em;
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1rem;
 
-    position: relative;
-    top: 0;
-    transition: 0.2s ease-in-out;
-
     .menu-toggle {
-      transition: 0.2s ease-in-out;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+
       .material-icons {
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: var(--light);
-        transition: 0.2s ease-out;
       }
 
-      &:hover {
-        .material-icons {
-          color: var(--primary);
-          transform: translateX(0.5rem);
-        }
+      &:hover .material-icons {
+        color: var(--primary);
       }
     }
   }
 
-  h3,
-  .button .text {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+  .menu h3 {
+    display: flex;
+    justify-content: center;
   }
 
   h3 {
@@ -130,6 +126,8 @@ aside {
     font-size: 0.875rem;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
   }
 
   .menu {
@@ -139,18 +137,20 @@ aside {
       display: flex;
       align-items: center;
       text-decoration: none;
-
-      transition: 0.2s ease-in-out;
       padding: 0.5rem 1rem;
+      transition: background-color 0.3s ease-in-out;
 
       .material-icons {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        margin-right: 0;
         color: var(--light);
-        transition: 0.2s ease-in-out;
+        transition: margin-right 0.3s ease-in-out;
       }
+
       .text {
         color: var(--light);
-        transition: 0.2s ease-in-out;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
       }
 
       &:hover {
@@ -164,7 +164,7 @@ aside {
 
       &.router-link-exact-active {
         background-color: var(--dark-alt);
-        border-right: 5px solid var(--primary);
+        border-right: 3px solid var(--primary);
 
         .material-icons,
         .text {
@@ -174,26 +174,8 @@ aside {
     }
   }
 
-  .footer {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-
-    p {
-      font-size: 0.875rem;
-      color: var(--grey);
-    }
-  }
-
   &.is-expanded {
-    width: var(--sidebar-width);
-
-    .menu-toggle-wrap {
-      top: -3rem;
-
-      .menu-toggle {
-        transform: rotate(-180deg);
-      }
-    }
+    width: 240px;
 
     h3,
     .button .text {
@@ -204,10 +186,6 @@ aside {
       .material-icons {
         margin-right: 1rem;
       }
-    }
-
-    .footer {
-      opacity: 0;
     }
   }
 
